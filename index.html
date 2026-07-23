@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FastBite - Makanan Cepat Saji & Lezat</title>
+  <!-- Google Font: Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #ff4757;
+      --primary-hover: #e84118;
+      --secondary: #ffa502;
+      --dark: #2f3542;
+      --gray: #f1f2f6;
+      --text-muted: #747d8c;
+      --white: #ffffff;
+      --radius: 16px;
+      --shadow: 0 10px 25px rgba(0,0,0,0.05);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: #fafafa;
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 8%;
+      background: var(--white);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .logo span {
+      color: var(--secondary);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .cart-btn {
+      background: var(--primary);
+      color: var(--white);
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 30px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.3s;
+    }
+
+    .cart-btn:hover {
+      background: var(--primary-hover);
+    }
+
+    /* Hero Section */
+    .hero {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      align-items: center;
+      padding: 4rem 8%;
+      gap: 2rem;
+    }
+
+    .hero-text h1 {
+      font-size: 3rem;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .hero-text h1 span {
+      color: var(--primary);
+    }
+
+    .hero-text p {
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: var(--white);
+      padding: 0.8rem 1.8rem;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 8px 20px rgba(255, 71, 87, 0.3);
+      transition: transform 0.2s;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+    }
+
+    .hero-img {
+      text-align: center;
+      font-size: 10rem; /* Placeholder icon/illustration */
+      line-height: 1;
+    }
+
+    /* Category Filter */
+    .categories {
+      padding: 2rem 8%;
+      text-align: center;
+    }
+
+    .category-chips {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+    }
+
+    .chip {
+      padding: 0.6rem 1.5rem;
+      background: var(--white);
+      border: 1px solid #e0e0e0;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s;
+    }
+
+    .chip.active, .chip:hover {
+      background: var(--primary);
+      color: var(--white);
+      border-color: var(--primary);
+    }
+
+    /* Food Menu Grid */
+    .menu-section {
+      padding: 2rem 8% 4rem 8%;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .food-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+    }
+
+    .food-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    }
+
+    .food-emoji {
+      font-size: 5rem;
+      text-align: center;
+      margin-bottom: 1rem;
+      background: var(--gray);
+      border-radius: 12px;
+      padding: 1rem;
+    }
+
+    .food-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+
+    .food-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .price {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--dark);
+    }
+
+    .add-btn {
+      background: var(--secondary);
+      color: var(--white);
+      border: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .add-btn:hover {
+      background: #e09200;
+    }
+
+    /* Responsive Breakdown */
+    @media (max-width: 768px) {
+      .hero-text h1 {
+        font-size: 2.2rem;
+      }
+      .nav-links {
+        display: none; /* Disembunyikan untuk simplifikasi mobile navbar */
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="logo">Fast<span>Bite</span></div>
+    <ul class="nav-links">
+      <li><a href="#home">Beranda</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#promo">Promo</a></li>
+    </ul>
+    <button class="cart-btn">
+      🛒 Keranjang (0)
+    </button>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="hero-text">
+      <h1>Nikmati <span>Makanan Cepat Saji</span> Favoritmu Kapan Saja</h1>
+      <p>Pesan burger, pizza, dan makanan lezat lainnya dengan pengiriman super cepat langsung ke rumahmu.</p>
+      <div class="cta-buttons">
+        <a href="#menu" class="btn-primary">Pesan Sekarang</a>
+      </div>
+    </div>
+    <div class="hero-img">
+      🍔
+    </div>
+  </section>
+
+  <!-- Category Filter -->
+  <section class="categories">
+    <h2>Pilih Kategori Menu</h2>
+    <div class="category-chips">
+      <div class="chip active">Semua</div>
+      <div class="chip">Burger</div>
+      <div class="chip">Pizza</div>
+      <div class="chip">Ayam</div>
+      <div class="chip">Minuman</div>
+    </div>
+  </section>
+
+  <!-- Food Menu Section -->
+  <section class="menu-section" id="menu">
+    <div class="menu-grid">
+      
+      <!-- Card 1 -->
+      <div class="food-card">
+        <div class="food-emoji">🍔</div>
+        <div class="food-title">Cheese Burger Supreme</div>
+        <div class="food-desc">Daging sapi pilihan, keju leleh, dan sayuran segar.</div>
+        <div class="card-footer">
+          <span class="price">Rp 35.000</span>
+          <button class="add-btn">+</button>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="food-card">
+        <div class="food-emoji">🍕</div>
+        <div class="food-title">Pepperoni Pizza</div>
+        <div class="food-desc">Topping pepperoni gurih dengan keju mozzarella melimpah.</div>
+        <div class="card-footer">
+          <span class="price">Rp 65.000</span>
+          <button class="add-btn">+</button>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="food-card">
+        <div class="food-emoji">🍗</div>
+        <div class="food-title">Crispy Fried Chicken</div>
+        <div class="food-desc">Ayam goreng renyah di luar, lembut dan juicy di dalam.</div>
+        <div class="card-footer">
+          <span class="price">Rp 28.000</span>
+          <button class="add-btn">+</button>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="food-card">
+        <div class="food-emoji">🥤</div>
+        <div class="food-title">Iced Cola Regular</div>
+        <div class="food-desc">Minuman bersoda dingin yang menyegarkan dahaga.</div>
+        <div class="card-footer">
+          <span class="price">Rp 12.000</span>
+          <button class="add-btn">+</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</body>
+</html>
